@@ -1,0 +1,27 @@
+Hermits Whist is a solitaire trick-taking game in which you try to win tricks against a dummy hand. The trump is randomly determined by flipping over an 8, but with every trick you have the option of randomly determining a new trump. Each pass through the deck is two hands; you play a second hand (called the aft hand) without reshuffling the cards.
+
+Setup:
+Set all six of the wild cards aside in a row. These cards will be used for scoring.
+Separate the 8s from the deck. Shuffle them together in their own pile and flip up the top card. This determines the initial trump suit.
+Shuffle the rest of the deck together. Deal ten cards to you and ten face down to the dummy player.
+
+Game Play:
+-Flip over the top card of the dummy hand, then you may play any card from your hand.
+Before playing your card you have the option to flip over the next card in the 8 stack. That suit is now trump, instead of the suit of the previous 8. The new trump determines whether or not you win this trick and remains in effect until you turn over another 8. 
+-If you turn over all the 8s so there are no cards left in the 8 stack, then there is no trump for the remainder of the game. With no trump, the highest card that shares a suit with the dummy's lead wins. You can flip through the 8s deck as many times as you like before playing your card until you get to the end of the 8s deck. The 8s deck never reset for the rest of the game.
+-You win the trick if you played a trump and the dummy didn't, if you played a higher trump than the dummy, or if no trump was played but you followed suit with a higher card. Otherwise, you lose the trick.
+-Regardless of who wins the trick, continue until you have resolved eight tricks and depleted both hands.
+-If you won exactly as many tricks as the pip number of one of the face up seven cards then you flip over that seven card and move on. If you won either more or fewer tricks, you have lost.
+-Set aside the tricks from this hand and, without reshuffling, deal the aft hand.
+
+The aft hand:
+-Leave the wild pile as it is. Using the remainder of the deck, deal again: Ten cards to yourself and ten to the dummy. (There will be four cards leftover. Set them aside without looking at them.)
+-Bidding and game play for the aft hand are the same as for the fore.
+After completing the aft hand, reshuffle the main deck but leave the 8s as they are. Continue with another forehand.
+
+Game Ends:
+Succeeding at four fore hands and four aft hands requires making all six possible bids. If you can do that, you win the game. If you ever fail to make even one bid along the way, however, you lose.
+
+Credits:
+Designed by Adam Telford
+The game is inspired by P.D. Magnus.
