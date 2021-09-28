@@ -24,8 +24,8 @@ var P1 = new Phaser.Class({
         this.load.image('ENGINESbig', 'assets/out/ENGINES.png');
         this.load.image('PORTbig', 'assets/out/PORT.png');
         this.load.image('Gunsbig', 'assets/out/Guns.png');
-        this.load.image('END', 'assets/text/end.png');
-        this.load.image('SCORE', 'assets/text/SCORE2.png');
+        this.load.image('END', 'assets/Text/end.png');
+        this.load.image('SCORE', 'assets/Text/SCORE2.png');
         this.load.image('musicOff', 'assets/icons/sound-off.png');
         this.load.image('musicOn', 'assets/icons/sound-on.png');
         this.load.image('full', 'assets/icons/expand.png');
