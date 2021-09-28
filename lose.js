@@ -14,7 +14,7 @@ var Lose = new Phaser.Class({
         var cards = ["Browser", "Malware", "PrivilegeEsc", "Driver", "Service", "CloudStorage", "IMDS", "MFA", "User", "CloudAccount", "CredStuffing", "Kubelet", "WateringHole", "WebShell", "FakeInstaller", "OfficeMacro", "ShadowCopy", "Sysmon", "Behavior", "DPAT", "Endpoint", "SIEM", "Sinkhole", "ZeroTrust", "IAM", "SRUM", "MFAB"];
         this.load.bitmapFont('topaz', 'assets/fonts/lato.png', 'assets/fonts/lato.xml');
         //this.load.image('back', 'assets/backgrounds/star1.jpg');
-        this.load.image('title', 'assets/Text/text.png');
+        this.load.image('title', 'assets/Text/home.png');
         this.load.image('cb', 'assets/out/back.png');
         var i;
         for (i = 0; i < cards.length; i++) {
