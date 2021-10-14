@@ -201,14 +201,15 @@ var Win = new Phaser.Class({
     });
 
       //////////////////////////////////////////////////////////////
+      mobile = "yes";
       setTimeout(() => {
         this.sound.add('avic').play();
-      }, 6000);
+      }, 0);
       setTimeout(() => {
         endm = this.sound.add('mwin');
         //endm.loop = true;
         endm.play();
-      }, 9000);
+      }, 10000);
       //this.scale.startFullscreen();
       function shuffle(array) {
           var currentIndex = array.length, temporaryValue, randomIndex;
@@ -283,45 +284,53 @@ var Win = new Phaser.Class({
   },
   update: function (time, delta)
 {
-    if (cursors.left.isDown)
-    {
-        ship.setAngularVelocity(-150);
-    }
-    else if (cursors.right.isDown)
-    {
-        ship.setAngularVelocity(150);
-    }
-    else
-    {
-        ship.setAngularVelocity(0);
-    }
+  if (cursors.left.isDown)
+  {
+      ship.setAngularVelocity(-150);
+      mobile = "No";
+  }
+  else if (cursors.right.isDown)
+  {
+      ship.setAngularVelocity(150);
+      mobile = "No";
+  }
+  else
+  {
+      ship.setAngularVelocity(0);
+  }
 
-    if (cursors.up.isDown)
-    {
-        this.physics.velocityFromRotation(ship.rotation, 600, ship.body.acceleration);
-    }
-    else
-    {
+  if (cursors.up.isDown)
+  {
+      this.physics.velocityFromRotation(ship.rotation, 600, ship.body.acceleration);
+      mobile = "No";
+  }
+  else
+  {
+      if(mobile == "No"){
         ship.setAcceleration(0);
-    }
+      }
+      else{
+        this.physics.velocityFromRotation(ship.rotation, 100, ship.body.acceleration);
+      }
+  }
 
-    if (fire.isDown && time > lastFired)
-    {
-        var bullet = bullets.get();
+  if (fire.isDown && time > lastFired)
+  {
+      var bullet = bullets.get();
 
-        if (bullet)
-        {
-            bullet.fire(ship);
+      if (bullet)
+      {
+          bullet.fire(ship);
 
-            lastFired = time + 100;
-        }
-    }
+          lastFired = time + 100;
+      }
+  }
 
-    bg.tilePositionX += ship.body.deltaX() * 0.5;
-    bg.tilePositionY += ship.body.deltaY() * 0.5;
+  bg.tilePositionX += ship.body.deltaX() * 0.5;
+  bg.tilePositionY += ship.body.deltaY() * 0.5;
 
-    stars.tilePositionX += ship.body.deltaX() * 2;
-    stars.tilePositionY += ship.body.deltaY() * 2;
+  stars.tilePositionX += ship.body.deltaX() * 2;
+  stars.tilePositionY += ship.body.deltaY() * 2;
 }
 });
 var config = {

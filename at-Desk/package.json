@@ -1,0 +1,70 @@
+{
+  "name": "pp-desk",
+  "version": "1.0.0",
+  "description": "Desktop install for Pirates Port.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Webdeskme/pp-Desk.git"
+  },
+  "keywords": [
+    "Pirates",
+    "Port",
+    "SANS",
+    "Card",
+    "Game",
+    "Game"
+  ],
+  "author": {
+    "name": "Webdesk",
+    "email": "info@webdesk.me",
+    "url": "https://www.webdesk.me/"
+  },
+  "build": {
+    "appId": "Pirates_Port",
+    "productName": "Pirates Port",
+    "asar": true,
+    "copyright": "©2019 WebDesk, Inc.",
+    "mac": {
+      "category": "Pirates_Port.Utility"
+    },
+    "win": {
+      "icon": "icon.ico",
+      "target": [
+        "msi"
+      ]
+    },
+    "linux": {
+      "icon": "icon.icns",
+      "target": [
+        "AppImage",
+        "deb",
+        "snap",
+        "rpm"
+      ],
+      "category": "Utility",
+      "packageCategory": "Utility"
+    },
+    "deb": {
+      "synopsis": "Pirates Port"
+    },
+    "snap": {
+      "synopsis": "Pirates Port"
+    }
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Webdeskme/pp-Desk/issues"
+  },
+  "homepage": "https://github.com/Webdeskme/pp-Desk#readme",
+  "devDependencies": {
+    "electron": "^15.0.0",
+    "electron-builder": "^22.11.7"
+  }
+}
