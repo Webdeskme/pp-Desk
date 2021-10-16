@@ -66,5 +66,9 @@
   "devDependencies": {
     "electron": "^15.0.0",
     "electron-builder": "^22.11.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.3.0"
   }
 }

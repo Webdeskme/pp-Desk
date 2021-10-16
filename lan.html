@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pirates Port</title>
+      <!--<script src="phaser.min.js"></script>-->
+      <!--<link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+  	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" sizes="128x128" href="webdesk.png">
+  	<meta name="HandheldFriendly" content="true" />
+  	<meta name="mobile-web-app-capable" content="yes" />
+    <!--<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />-->
+    <link rel="icon" href="favicon.ico">
+    <!-- ver: 1 -->
+    <style>
+      html, body {
+        height: 100%;
+      }
+
+      html {
+        margin: auto;
+      }
+
+      body {
+        background-color: #000000;
+        color: #ffffff;
+      }
+      u { cursor: pointer; }
+    </style>
+  </head>
+  <body id="app">
+    <a href="game.html">BACK</a>
+    <br><br>
+    <h2>LAN Connection</h2>
+    <div id="outerLocal">
+      <p id="localPrompt">
+        <strong>Want to share with your local network?</strong>
+      </p>
+      <div id="innerLocal">
+        <h4 class="add-title">Local IP</h4>
+        <p id="localAdd"></p>
+        <!---<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+        <script src="assets/bootstrap/js/bootstrap.js"></script>
+        <script src="lan.js"></script>
+        <script>if (window.module) module = window.module;</script>-->
+        <script src="lan.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

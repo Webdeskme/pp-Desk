@@ -816,6 +816,7 @@ var SubM = new Phaser.Class({
       this.load.image('vscomp', 'assets/Text/vscomp.png');
       this.load.image('undo', 'assets/Text/back.png');
       this.load.image('aiexp', 'assets/Text/aiexp.png');
+      this.load.image('lan', 'assets/Text/lan.png');
       this.load.text('s1', 'assets/Text/story/s1.txt');
       this.load.text('s2', 'assets/Text/story/s2.txt');
       this.load.text('s3', 'assets/Text/story/s3.txt');
@@ -877,6 +878,7 @@ var SubM = new Phaser.Class({
       var n = this.add.image(900, 250, 'coop').setScrollFactor(0,0);
       var o = this.add.image(900, 300, '3coop').setScrollFactor(0,0);
       var aie = this.add.image(900, 350, 'aiexp').setScrollFactor(0,0);
+      var lan = this.add.image(900, 400, 'lan').setScrollFactor(0,0);
       aie.setInteractive({ useHandCursor: true  } );
       aie.setScale(1/4);
       un.setInteractive({ useHandCursor: true  } );
@@ -891,6 +893,8 @@ var SubM = new Phaser.Class({
       n.setScale(1/4);
       o.setInteractive({ useHandCursor: true  } );
       o.setScale(1/4);
+      lan.setInteractive({ useHandCursor: true  } );
+      lan.setScale(1/4);
       aie.on('pointerover',function(pointer){
         aie.setScale(1/3);
       });
@@ -932,6 +936,12 @@ var SubM = new Phaser.Class({
       });
       o.on('pointerout',function(pointer){
         o.setScale(1/4);
+      });
+      lan.on('pointerover',function(pointer){
+        lan.setScale(1/3);
+      });
+      lan.on('pointerout',function(pointer){
+        lan.setScale(1/4);
       });
       aie.on('pointerdown', () => {
         this.sound.add('click').play();
@@ -981,6 +991,13 @@ var SubM = new Phaser.Class({
         this.game.sound.stopAll();
         //this.scene.start('p1');
         window.location.href = "p3.html";
+      });
+      lan.on('pointerdown', () => {
+        this.sound.add('click').play();
+        //endm.stop();
+        this.game.sound.stopAll();
+        //this.scene.start('p1');
+        window.location.href = "lan.html";
       });
       }
     });
