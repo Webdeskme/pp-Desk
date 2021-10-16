@@ -109,6 +109,7 @@ var P1 = new Phaser.Class({
           var red = "no";
           var reds = "";
           function sel(c, th, im){
+            buy = "no";
             //c.on('pointerdown',function(pointer){
               th.sound.add('click').play();
               if(reds == c["texture"]["key"]){
@@ -1321,6 +1322,7 @@ var P1 = new Phaser.Class({
         cscore = 0;
         checkScore = "no";
         player = 1;
+        buy = "no";
         var localStorageName = "piratesPort";
         var localStorageTemp = "piratesPort_temp";
         var localStoragePlayer = "piratesPort_player";
