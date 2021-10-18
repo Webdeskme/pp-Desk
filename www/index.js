@@ -75,6 +75,7 @@ var P1 = new Phaser.Class({
       this.socket = io();
       this.socket.on('player', function (si1) {
         serv.setText('You are Player ' + si1);
+        console.log("player: " + si1);
         if(si1 == 1){
           pl = 1;
           shuffle(cards);
@@ -101,9 +102,10 @@ var P1 = new Phaser.Class({
             var aquire = "no";
             th.sound.add('click').play();
             if(red == "yes"){
+              th.socket.emit('bsel', c['x']);
               if(c.tintTopLeft !== 0x00ff00){
                 c.setTint(0x00ff00);
-                th.socket.emit('bsel', c["texture"]["key"]);
+                console.log(c['x']);
                 if(c["texture"]["key"] == "P1C"){
                   coin += 1;
                   ccard += 1;
@@ -537,7 +539,7 @@ var P1 = new Phaser.Class({
               }
               if( aquire == "yes"){
                 aq += 1;
-                //console.log(p3.destroy());
+                console.log(p3);
                 if(por == "PORT2"){
                   if(aq > 2){
                     th.sound.add('comp').play();
@@ -940,56 +942,66 @@ var P1 = new Phaser.Class({
         //  return coin;
         }
         else{
+        //  console.log(p3);
           th.socket.on('bsel', function (si6) {
-            if(typeof p0 !== 'undefined' && p0["texture"]["key"] == si6){
+            if(typeof p0 !== 'undefined' && p0['x'] == si6){
               p0.setTint(0x00ff00);
             }
-            else if(typeof p1 !== 'undefined' && p1["texture"]["key"] == si6){
+            else if(typeof p1 !== 'undefined' && p1['x'] == si6){
               p1.setTint(0x00ff00);
             }
-            else if(typeof p2 !== 'undefined' && p2["texture"]["key"] == si6){
+            else if(typeof p2 !== 'undefined' && p2['x'] == si6){
               p2.setTint(0x00ff00);
             }
-            else if(typeof p3 !== 'undefined' && p3["texture"]["key"] == si6){
-              p3.setTint(0x00ff00);
+            else if(typeof p3 !== 'undefined' && p3['x'] == si6){
+              console.log(p3['isTinted']);
+              if(p3['isTinted'] == false){
+                p3.setTint(0x00ff00);
+              }
+              else{
+                p3.clearTint();
+              }
+              //console.log(p3);
+              //p3.setTint(0x00ff00);
+              //console.log(p3.tintTopLeft);
             }
-            else if(typeof p4 !== 'undefined' && p4["texture"]["key"] == si6){
+            else if(typeof p4 !== 'undefined' && p4['x'] == si6){
               p4.setTint(0x00ff00);
             }
-            else if(typeof p5 !== 'undefined' && p5["texture"]["key"] == si6){
+            else if(typeof p5 !== 'undefined' && p5['x'] == si6){
               p5.setTint(0x00ff00);
             }
-            else if(typeof p6 !== 'undefined' && p6["texture"]["key"] == si6){
+            else if(typeof p6 !== 'undefined' && p6['x'] == si6){
               p6.setTint(0x00ff00);
             }
-            else if(typeof p7 !== 'undefined' && p7["texture"]["key"] == si6){
+            else if(typeof p7 !== 'undefined' && p7['x'] == si6){
               p7.setTint(0x00ff00);
             }
-            else if(typeof p8 !== 'undefined' && p8["texture"]["key"] == si6){
+            else if(typeof p8 !== 'undefined' && p8['x'] == si6){
               p8.setTint(0x00ff00);
             }
-            else if(typeof p9 !== 'undefined' && p9["texture"]["key"] == si6){
+            else if(typeof p9 !== 'undefined' && p9['x'] == si6){
               p9.setTint(0x00ff00);
             }
-            else if(typeof p10 !== 'undefined' && p10["texture"]["key"] == si6){
+            else if(typeof p10 !== 'undefined' && p10['x'] == si6){
               p10.setTint(0x00ff00);
             }
-            else if(typeof p11 !== 'undefined' && p11["texture"]["key"] == si6){
+            else if(typeof p11 !== 'undefined' && p11['x'] == si6){
               p11.setTint(0x00ff00);
             }
-            else if(typeof p12 !== 'undefined' && p12["texture"]["key"] == si6){
+            else if(typeof p12 !== 'undefined' && p12['x'] == si6){
               p12.setTint(0x00ff00);
             }
-            else if(typeof p13 !== 'undefined' && p13["texture"]["key"] == si6){
+            else if(typeof p13 !== 'undefined' && p13['x'] == si6){
               p13.setTint(0x00ff00);
             }
-            else if(typeof p14 !== 'undefined' && p14["texture"]["key"] == si6){
+            else if(typeof p14 !== 'undefined' && p14['x'] == si6){
               p14.setTint(0x00ff00);
             }
-            else if(typeof p15 !== 'undefined' && p15["texture"]["key"] == si6){
+            else if(typeof p15 !== 'undefined' && p15['x'] == si6){
               p15.setTint(0x00ff00);
             }
-            else if(typeof p16 !== 'undefined' && p16["texture"]["key"] == si6){
+            else if(typeof p16 !== 'undefined' && p16['x'] == si6){
               p16.setTint(0x00ff00);
             }
           });
