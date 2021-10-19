@@ -73,28 +73,615 @@ var P1 = new Phaser.Class({
     create: function ()
     {
       this.socket = io();
+      this.socket.on('next', function (cards, p, health) {
+        healthText.setText('Health: ' + health);
+        console.log(player);
+        playerText.setText('Player: ' + player);
+        start(th, cards, p);
+      });
       this.socket.on('player', function (si1) {
         serv.setText('You are Player ' + si1);
-        console.log("player: " + si1);
         if(si1 == 1){
           pl = 1;
           shuffle(cards);
           shuffle(p);
-          th.socket.emit("cards", cards);
+          th.socket.emit("cards", cards, health);
           th.socket.emit("p", p);
+          healthText.setText('Health: ' + health);
           start(th, cards, p);
         }
         else{
           pl = 2;
-          th.socket.on('cards', function (si3) {
+          th.socket.on('cards', function (si3, heal) {
             cards = si3;
             th.socket.on('p', function (si4) {
               p = si4;
+              healthText.setText('Health:' + heal);
               start(th, cards, p);
             });
           });
         }
-        start(th, cards, p);
+//bill
+        th.socket.on('tend', function (cardss, diss) {
+          player = pl;
+          if(player == 1){
+            game = game1;
+            p = player1;
+            pdis = pdis1;
+            health = health1;
+          }
+          else{
+            game = game2;
+            p = player2;
+            pdis = pdis2
+            health = health2;
+          }
+          game = game2;
+          dis = diss;
+          cards = cardss;
+          //start(th, cards, p);
+          hand = 4;
+          if(player == pl){
+          healthText.setText('Health: ' + health);
+          playerText.setText('Player: ' + player);
+          c5 = th.add.image(250, 400, cards[5]).setInteractive({ useHandCursor: true  } );
+          hove(c5, th, cards[5] + 'big');
+          select(c5, th, cards[5]);
+          c4 = th.add.image(375, 400, cards[4]).setInteractive({ useHandCursor: true  } );
+          hove(c4, th, cards[4] + 'big');
+          select(c4, th, cards[4]);
+          c3 = th.add.image(500, 400, cards[3]).setInteractive({ useHandCursor: true  } );
+          hove(c3, th, cards[3] + 'big');
+          select(c3, th, cards[3]);
+          c2 = th.add.image(625, 400, cards[2]).setInteractive({ useHandCursor: true  } );
+          hove(c2, th, cards[2] + 'big');
+          select(c2, th, cards[2]);
+          c1 = th.add.image(750, 400, cards[1]).setInteractive({ useHandCursor: true  } );
+          hove(c1, th, cards[1] + 'big');
+          select(c1, th, cards[1]);
+          c0 = th.add.image(875, 400, cards[0]).setInteractive({ useHandCursor: true  } );
+          hove(c0, th, cards[0] + 'big');
+          select(c0, th, cards[0]);
+          var z = hand - 1;
+          /*if (typeof p[z] == 'undefined') {
+            shuffle(pdis);
+            p = p.concat(pdis);
+            pdis = [];
+          }*/
+          function draw(start, num){
+            var y = 0;
+            for (var i = start; i < num; i++) {
+              /*if(typeof p[i] == "undefined"){
+                shuffle(pdis);
+                p = p.concat(pdis);
+                pdis = [];
+              }*/
+              if(p[i] == "Browser" || p[i] == "Driver" || p[i] == "CloudStorage" || p[i] == "IMDS" || p[i] == "User" || p[i] == "FakeInstaller" || p[i] == "OfficeMacro" || p[i] == "Sysmon" || p[i] == "DPAT" || p[i] == "Endpoint" || p[i] == "Sinkhole" || p[i] == "IAM" || p[i] == "MFAB"){
+                hand += 1;
+                y += 1;
+              }
+            }
+            if(y > 0){
+              draw(num, hand);
+            }
+          }
+          draw(0,4);
+          z = hand - 1;
+          if (typeof p[z] == 'undefined') {
+            shuffle(pdis);
+            p = p.concat(pdis);
+            pdis = [];
+          }
+          if (typeof p0 !== 'undefined') {
+            p0.destroy();
+          }
+          if (typeof p1 !== 'undefined') {
+            p1.destroy();
+          }
+          if (typeof p2 !== 'undefined') {
+            p2.destroy();
+          }
+          if (typeof p3 !== 'undefined') {
+            p3.destroy();
+          }
+          if (typeof p4 !== 'undefined') {
+            p4.destroy();
+          }
+          if (typeof p5 !== 'undefined') {
+            p5.destroy();
+          }
+          if (typeof p6 !== 'undefined') {
+            p6.destroy();
+          }
+          if (typeof p7 !== 'undefined') {
+            p7.destroy();
+          }
+          if (typeof p7 !== 'undefined') {
+            p7.destroy();
+          }
+          if (typeof p8 !== 'undefined') {
+            p8.destroy();
+          }
+          if (typeof p9 !== 'undefined') {
+            p9.destroy();
+          }
+          if (typeof p10 !== 'undefined') {
+            p10.destroy();
+          }
+          if (typeof p11 !== 'undefined') {
+            p11.destroy();
+          }
+          if (typeof p12 !== 'undefined') {
+            p12.destroy();
+          }
+          if (typeof p13 !== 'undefined') {
+            p13.destroy();
+          }
+          if (typeof p14 !== 'undefined') {
+            p14.destroy();
+          }
+          if (typeof p15 !== 'undefined') {
+            p15.destroy();
+          }
+          if (typeof p16 !== 'undefined') {
+            p16.destroy();
+          }
+          if(hand > 15 && typeof p[15] != 'undefined'){
+            p15 = th.add.image(63, 550, p[15]).setInteractive({ useHandCursor: true  } );
+            hove(p15, th, p[15] + 'big');
+            bselect(p15, th, p[15]);
+          }
+          if(hand > 7 && typeof p[7] != 'undefined'){
+            p7 = th.add.image(125, 550, p[7]).setInteractive({ useHandCursor: true  } );
+            hove(p7, th, p[7] + 'big');
+            bselect(p7, th, p[7]);
+          }
+          if(hand > 8 && typeof p[8] != 'undefined'){
+            p8 = th.add.image(187, 550, p[8]).setInteractive({ useHandCursor: true  } );
+            hove(p8, th, p[8] + 'big');
+            bselect(p8, th, p[8]);
+          }
+          if(hand > 0 && typeof p[0] != 'undefined'){
+            p0 = th.add.image(250, 550, p[0]).setInteractive({ useHandCursor: true  } );
+            hove(p0, th, p[0] + 'big');
+            bselect(p0, th, p[0]);
+          }
+          if(hand > 9 && typeof p[9] != 'undefined'){
+            p9 = th.add.image(312, 550, p[9]).setInteractive({ useHandCursor: true  } );
+            hove(p9, th, p[9] + 'big');
+            bselect(p9, th, p[9]);
+          }
+          if(hand > 1 && typeof p[1] != 'undefined'){
+            p1 = th.add.image(375, 550, p[1]).setInteractive({ useHandCursor: true  } );
+            hove(p1, th, p[1] + 'big');
+            bselect(p1, th, p[1]);
+          }
+          if(hand > 10 && typeof p[10] != 'undefined'){
+            p10 = th.add.image(437, 550, p[10]).setInteractive({ useHandCursor: true  } );
+            hove(p10, th, p[10] + 'big');
+            bselect(p10, th, p[10]);
+          }
+          if(hand > 2 && typeof p[2] != 'undefined'){
+            p2 = th.add.image(500, 550, p[2]).setInteractive({ useHandCursor: true  } );
+            hove(p2, th, p[2] + 'big');
+            bselect(p2, th, p[2]);
+          }
+          if(hand > 11 && typeof p[11] != 'undefined'){
+            p11 = th.add.image(562, 550, p[11]).setInteractive({ useHandCursor: true  } );
+            hove(p11, th, p[11] + 'big');
+            bselect(p11, th, p[11]);
+          }
+          if(hand > 3 && typeof p[3] != 'undefined'){
+            p3 = th.add.image(625, 550, p[3]).setInteractive({ useHandCursor: true  } );
+            hove(p3, th, p[3] + 'big');
+            bselect(p3, th, p[3]);
+          }
+          if(hand > 12 && typeof p[12] != 'undefined'){
+            p12 = th.add.image(687, 550, p[12]).setInteractive({ useHandCursor: true  } );
+            hove(p12, th, p[12] + 'big');
+            bselect(p12, th, p[12]);
+          }
+          if(hand > 4 && typeof p[4] != 'undefined'){
+            p4 = th.add.image(750, 550, p[4]).setInteractive({ useHandCursor: true  } );
+            hove(p4, th, p[4] + 'big');
+            bselect(p4, th, p[4]);
+          }
+          if(hand > 13 && typeof p[13] != 'undefined'){
+            p13 = th.add.image(812, 550, p[13]).setInteractive({ useHandCursor: true  } );
+            hove(p13, th, p[13] + 'big');
+            bselect(p13, th, p[13]);
+          }
+          if(hand > 16 && typeof p[16] != 'undefined'){
+            p16 = th.add.image(850, 550, p[16]).setInteractive({ useHandCursor: true  } );
+            hove(p16, th, p[16] + 'big');
+            bselect(p16, th, p[16]);
+          }
+          if(hand > 5 && typeof p[5] != 'undefined'){
+            p5 = th.add.image(875, 550, p[5]).setInteractive({ useHandCursor: true  } );
+            hove(p5, th, p[5] + 'big');
+            bselect(p5, th, p[5]);
+          }
+          if(hand > 14 && typeof p[14] != 'undefined'){
+            p14 = th.add.image(937, 550, p[14]).setInteractive({ useHandCursor: true  } );
+            hove(p14, th, p[14] + 'big');
+            bselect(p14, th, p[14]);
+          }
+          if(hand > 6 && typeof p[6] != 'undefined'){
+            p6 = th.add.image(1000, 550, p[6]).setInteractive({ useHandCursor: true  } );
+            hove(p6, th, p[6] + 'big');
+            bselect(p6, th, p[6]);
+          }
+          th.socket.emit('next', cards, p, health);
+          //th.socket.emit('p', p);
+        }
+        });
+        th.socket.on('aq', function (cards, p, mis, l) {
+          //bill
+          if (typeof big != "undefined" && big != null) {
+            big.destroy();
+            big = null;
+          }
+          if(mis[0] == "yes"){
+            cc.visible = true;
+          }
+          else{
+            cc.visible = false;
+          }
+          if(mis[1] == "yes"){
+            ce.visible = true;
+          }
+          else{
+            ce.visible = false;
+          }
+          if(mis[2] == "yes"){
+            cp.visible = true;
+          }
+          else{
+            cp.visible = false;
+          }
+          c5 = th.add.image(250, 400, cards[5]).setInteractive({ useHandCursor: true  } );
+          hove(c5, th, cards[5] + 'big');
+          select(c5, th, cards[5]);
+          c4 = th.add.image(375, 400, cards[4]).setInteractive({ useHandCursor: true  } );
+          hove(c4, th, cards[4] + 'big');
+          select(c4, th, cards[4]);
+          c3 = th.add.image(500, 400, cards[3]).setInteractive({ useHandCursor: true  } );
+          hove(c3, th, cards[3] + 'big');
+          select(c3, th, cards[3]);
+          c2 = th.add.image(625, 400, cards[2]).setInteractive({ useHandCursor: true  } );
+          hove(c2, th, cards[2] + 'big');
+          select(c2, th, cards[2]);
+          c1 = th.add.image(750, 400, cards[1]).setInteractive({ useHandCursor: true  } );
+          hove(c1, th, cards[1] + 'big');
+          select(c1, th, cards[1]);
+          c0 = th.add.image(875, 400, cards[0]).setInteractive({ useHandCursor: true  } );
+          hove(c0, th, cards[0] + 'big');
+          select(c0, th, cards[0]);
+          if (typeof p0 !== 'undefined') {
+            p0.destroy();
+          }
+          if (typeof p1 !== 'undefined') {
+            p1.destroy();
+          }
+          if (typeof p2 !== 'undefined') {
+            p2.destroy();
+          }
+          if (typeof p3 !== 'undefined') {
+            p3.destroy();
+          }
+          if (typeof p4 !== 'undefined') {
+            p4.destroy();
+          }
+          if (typeof p5 !== 'undefined') {
+            p5.destroy();
+          }
+          if (typeof p6 !== 'undefined') {
+            p6.destroy();
+          }
+          if (typeof p7 !== 'undefined') {
+            p7.destroy();
+          }
+          if (typeof p7 !== 'undefined') {
+            p7.destroy();
+          }
+          if (typeof p8 !== 'undefined') {
+            p8.destroy();
+          }
+          if (typeof p9 !== 'undefined') {
+            p9.destroy();
+          }
+          if (typeof p10 !== 'undefined') {
+            p10.destroy();
+          }
+          if (typeof p11 !== 'undefined') {
+            p11.destroy();
+          }
+          if (typeof p12 !== 'undefined') {
+            p12.destroy();
+          }
+          if (typeof p13 !== 'undefined') {
+            p13.destroy();
+          }
+          if (typeof p14 !== 'undefined') {
+            p14.destroy();
+          }
+          if (typeof p15 !== 'undefined') {
+            p15.destroy();
+          }
+          if (typeof p16 !== 'undefined') {
+            p16.destroy();
+          }
+      if(l > 15){
+        p15 = th.add.image(63, 550, p[15]).setInteractive({ useHandCursor: true  } );
+        hove(p15, th, p[15] + 'big');
+        bselect(p15, th, p[15] + 'big');
+      }
+      if(l > 7){
+        p7 = th.add.image(125, 550, p[7]).setInteractive({ useHandCursor: true  } );
+        hove(p7, th, p[7] + 'big');
+        bselect(p7, th, p[7]);
+      }
+      if(l > 8){
+        p8 = th.add.image(187, 550, p[8]).setInteractive({ useHandCursor: true  } );
+        hove(p8, th, p[8] + 'big');
+        bselect(p8, th, p[8]);
+      }
+      if(l > 0){
+        p0 = th.add.image(250, 550, p[0]).setInteractive({ useHandCursor: true  } );
+        hove(p0, th, p[0] + 'big');
+        bselect(p0, th, p[0]);
+      }
+      if(l > 9){
+        p9 = th.add.image(312, 550, p[9]).setInteractive({ useHandCursor: true  } );
+        hove(p9, th, p[9] + 'big');
+        bselect(p9, th, p[9]);
+      }
+      if(l > 1){
+        p1 = th.add.image(375, 550, p[1]).setInteractive({ useHandCursor: true  } );
+        hove(p1, th, p[1] + 'big');
+        bselect(p1, th, p[1]);
+      }
+      if(l > 10){
+        p10 = th.add.image(437, 550, p[10]).setInteractive({ useHandCursor: true  } );
+        hove(p10, th, p[10] + 'big');
+        bselect(p10, th, p[10]);
+      }
+      if(l > 2){
+        p2 = th.add.image(500, 550, p[2]).setInteractive({ useHandCursor: true  } );
+        hove(p2, th, p[2] + 'big');
+        bselect(p2, th, p[2]);
+      }
+      if(l > 11){
+        p11 = th.add.image(562, 550, p[11]).setInteractive({ useHandCursor: true  } );
+        hove(p11, th, p[11] + 'big');
+        bselect(p11, th, p[11]);
+      }
+      if(l > 3){
+        p3 = th.add.image(625, 550, p[3]).setInteractive({ useHandCursor: true  } );
+        hove(p3, th, p[3] + 'big');
+        bselect(p3, th, p[3]);
+      }
+      if(l > 12){
+        p12 = th.add.image(687, 550, p[12]).setInteractive({ useHandCursor: true  } );
+        hove(p12, th, p[12] + 'big');
+        bselect(p12, th, p[12]);
+      }
+      if(l > 4){
+        p4 = th.add.image(750, 550, p[4]).setInteractive({ useHandCursor: true  } );
+        hove(p4, th, p[4] + 'big');
+        bselect(p4, th, p[4]);
+      }
+      if(l > 13){
+        p13 = th.add.image(812, 550, p[13]).setInteractive({ useHandCursor: true  } );
+        hove(p13, th, p[13] + 'big');
+        bselect(p13, th, p[13]);
+      }
+      if(l > 16){
+        p16 = th.add.image(850, 550, p[16]).setInteractive({ useHandCursor: true  } );
+        hove(p16, th, p[16] + 'big');
+        bselect(p16, th, p[16]);
+      }
+      if(l > 5){
+        p5 = th.add.image(875, 550, p[5]).setInteractive({ useHandCursor: true  } );
+        hove(p5, th, p[5] + 'big');
+        bselect(p5, th, p[5]);
+      }
+      if(l > 14){
+        p14 = th.add.image(937, 550, p[14]).setInteractive({ useHandCursor: true  } );
+        hove(p14, th, p[14] + 'big');
+        bselect(p14, th, p[14]);
+      }
+      if(l > 6){
+        p6 = th.add.image(1000, 550, p[6]).setInteractive({ useHandCursor: true  } );
+        hove(p6, th, p[6] + 'big');
+        bselect(p6, th, p[6]);
+      }
+        });
+        th.socket.on('bsel', function (si6) {
+          if(typeof p0 !== 'undefined' && p0['x'] == si6){
+            p0.setTint(0x00ff00);
+          }
+          else if(typeof p1 !== 'undefined' && p1['x'] == si6){
+            p1.setTint(0x00ff00);
+          }
+          else if(typeof p2 !== 'undefined' && p2['x'] == si6){
+            p2.setTint(0x00ff00);
+          }
+          else if(typeof p3 !== 'undefined' && p3['x'] == si6){
+              p3.setTint(0x00ff00);
+          }
+          else if(typeof p4 !== 'undefined' && p4['x'] == si6){
+            p4.setTint(0x00ff00);
+          }
+          else if(typeof p5 !== 'undefined' && p5['x'] == si6){
+            p5.setTint(0x00ff00);
+          }
+          else if(typeof p6 !== 'undefined' && p6['x'] == si6){
+            p6.setTint(0x00ff00);
+          }
+          else if(typeof p7 !== 'undefined' && p7['x'] == si6){
+            p7.setTint(0x00ff00);
+          }
+          else if(typeof p8 !== 'undefined' && p8['x'] == si6){
+            p8.setTint(0x00ff00);
+          }
+          else if(typeof p9 !== 'undefined' && p9['x'] == si6){
+            p9.setTint(0x00ff00);
+          }
+          else if(typeof p10 !== 'undefined' && p10['x'] == si6){
+            p10.setTint(0x00ff00);
+          }
+          else if(typeof p11 !== 'undefined' && p11['x'] == si6){
+            p11.setTint(0x00ff00);
+          }
+          else if(typeof p12 !== 'undefined' && p12['x'] == si6){
+            p12.setTint(0x00ff00);
+          }
+          else if(typeof p13 !== 'undefined' && p13['x'] == si6){
+            p13.setTint(0x00ff00);
+          }
+          else if(typeof p14 !== 'undefined' && p14['x'] == si6){
+            p14.setTint(0x00ff00);
+          }
+          else if(typeof p15 !== 'undefined' && p15['x'] == si6){
+            p15.setTint(0x00ff00);
+          }
+          else if(typeof p16 !== 'undefined' && p16['x'] == si6){
+            p16.setTint(0x00ff00);
+          }
+        });
+        th.socket.on('sel', function (si5) {
+          if(reds == si5){
+            if (typeof c !== 'undefined') {
+            c.clearTint();
+          }
+            reds = "";
+            red = "no";
+          }
+          else if(si5 != "EMP"){
+            red = "yes";
+            reds = si5;
+            if (typeof cc !== 'undefined') {
+              cc.clearTint();
+            }
+            if (typeof ce !== 'undefined') {
+              ce.clearTint();
+            }
+            if (typeof cp !== 'undefined') {
+              cp.clearTint();
+            }
+            if (typeof cg !== 'undefined') {
+              cg.clearTint();
+            }
+            if (typeof c0 !== 'undefined') {
+              c0.clearTint();
+            }
+            if (typeof c1 !== 'undefined') {
+              c1.clearTint();
+            }
+            if (typeof c2 !== 'undefined') {
+              c2.clearTint();
+            }
+            if (typeof c3 !== 'undefined') {
+              c3.clearTint();
+            }
+            if (typeof c4 !== 'undefined') {
+              c4.clearTint();
+            }
+            if (typeof c5 !== 'undefined') {
+              c5.clearTint();
+            }
+            if (typeof p0 !== 'undefined') {
+              p0.clearTint();
+            }
+            if (typeof p1 !== 'undefined') {
+              p1.clearTint();
+            }
+            if (typeof p2 !== 'undefined') {
+              p2.clearTint();
+            }
+            if (typeof p3 !== 'undefined') {
+              p3.clearTint();
+            }
+            if (typeof p4 !== 'undefined') {
+              p4.clearTint();
+            }
+            if (typeof p5 !== 'undefined') {
+              p5.clearTint();
+            }
+            if (typeof p6 !== 'undefined') {
+              p6.clearTint();
+            }
+            if (typeof p7 !== 'undefined') {
+              p7.clearTint();
+            }
+            if (typeof p8 !== 'undefined') {
+              p8.clearTint();
+            }
+            if (typeof p9 !== 'undefined') {
+              p9.clearTint();
+            }
+            if (typeof p10 !== 'undefined') {
+              p10.clearTint();
+            }
+            if (typeof p11 !== 'undefined') {
+              p11.clearTint();
+            }
+            if (typeof p12 !== 'undefined') {
+              p12.clearTint();
+            }
+            if (typeof p13 !== 'undefined') {
+              p13.clearTint();
+            }
+            if (typeof p14 !== 'undefined') {
+              p14.clearTint();
+            }
+            if (typeof p15 !== 'undefined') {
+              p15.clearTint();
+            }
+            if (typeof p16 !== 'undefined') {
+              p16.clearTint();
+            }
+            if(cc["texture"]["key"] == si5){
+              cc.setTint(0xff0000);
+            }
+            else if(ce["texture"]["key"] == si5){
+              ce.setTint(0xff0000);
+            }
+            else if(cp["texture"]["key"] == si5){
+              cp.setTint(0xff0000);
+            }
+            else if(c0["texture"]["key"] == si5){
+              c0.setTint(0xff0000);
+            }
+            else if(c1["texture"]["key"] == si5){
+              c1.setTint(0xff0000);
+            }
+            else if(c2["texture"]["key"] == si5){
+              c2.setTint(0xff0000);
+            }
+            else if(c3["texture"]["key"] == si5){
+              c3.setTint(0xff0000);
+            }
+            else if(c4["texture"]["key"] == si5){
+              c4.setTint(0xff0000);
+            }
+            else if(c5["texture"]["key"] == si5){
+              c5.setTint(0xff0000);
+            }
+            /*if(si5 == "COM" || si5 == "ENGINES" || si5 == "PORT" || si5 == "Guns" || si5 == "COM2" || si5 == "ENGINES2" || si5 == "PORT2"){
+              c.setTint(0xff0000);
+            }
+            else{
+              if(checkScore == "yes"){
+                c.setTint(0x0000ff);
+              }
+              else{
+                c.setTint(0xff0000);
+              }
+            }*/
+          }
+        });
       });
       function bselect(c, th, im){
         if(player == pl){
@@ -105,7 +692,6 @@ var P1 = new Phaser.Class({
               th.socket.emit('bsel', c['x']);
               if(c.tintTopLeft !== 0x00ff00){
                 c.setTint(0x00ff00);
-                console.log(c['x']);
                 if(c["texture"]["key"] == "P1C"){
                   coin += 1;
                   ccard += 1;
@@ -538,8 +1124,9 @@ var P1 = new Phaser.Class({
                 }
               }
               if( aquire == "yes"){
+                //aq += 1;
+                //th.socket.emit('aq', temp2, temp);
                 aq += 1;
-                console.log(p3);
                 if(por == "PORT2"){
                   if(aq > 2){
                     th.sound.add('comp').play();
@@ -558,7 +1145,7 @@ var P1 = new Phaser.Class({
                       }
                       localStorage.setItem(localStorageTemp, score);
                       localStorage.setItem(localStoragePlayer, player);
-                      window.location.href = "winv.html";
+                      window.location.href = "win.html";
                     }
                   }
                 }
@@ -678,7 +1265,7 @@ var P1 = new Phaser.Class({
                       }
                       localStorage.setItem(localStorageTemp, score);
                       localStorage.setItem(localStoragePlayer, player);
-                      window.location.href = "winv.html";
+                      window.location.href = "win.html";
                   }
                   if(temp2 == "COM"){
                     th.sound.add('comp').play();
@@ -748,6 +1335,7 @@ var P1 = new Phaser.Class({
                     hove(c5, th, cards[5] + 'big');
                     select(c5, th, cards[5]);
                   }
+                  //bill
                   c4 = th.add.image(375, 400, cards[4]).setInteractive({ useHandCursor: true  } );
                   hove(c4, th, cards[4] + 'big');
                   select(c4, th, cards[4]);
@@ -772,7 +1360,6 @@ var P1 = new Phaser.Class({
                     p.filter(val => val);
                     pdis.push(temp[i]);
                   }
-                  console.log(typeof p3);
                     if (typeof p0 !== 'undefined') {
                       p0.destroy();
                     }
@@ -783,10 +1370,7 @@ var P1 = new Phaser.Class({
                       p2.destroy();
                     }
                     if (typeof p3 !== 'undefined') {
-                      console.log('did it');
                       p3.destroy();
-                      //p3.visible = false;
-                      console.log(p3);
                     }
                     if (typeof p4 !== 'undefined') {
                       p4.destroy();
@@ -928,6 +1512,12 @@ var P1 = new Phaser.Class({
               coinText.setText('Coins: ' + coin);
               totalText.setText('Total: ' + total);
               cardText.setText('Cards: ' + card);
+              if(player == 1){
+                th.socket.emit('aq', cards, p, mis1, l);
+              }
+              else{
+                th.socket.emit('aq', cards, p, mis2, l);
+              }
               }
             }
             else{
@@ -941,8 +1531,7 @@ var P1 = new Phaser.Class({
         //  return skill;
         //  return coin;
         }
-        else{
-        //  console.log(p3);
+        /*else{
           th.socket.on('bsel', function (si6) {
             if(typeof p0 !== 'undefined' && p0['x'] == si6){
               p0.setTint(0x00ff00);
@@ -954,16 +1543,7 @@ var P1 = new Phaser.Class({
               p2.setTint(0x00ff00);
             }
             else if(typeof p3 !== 'undefined' && p3['x'] == si6){
-              console.log(p3['isTinted']);
-              if(p3['isTinted'] == false){
                 p3.setTint(0x00ff00);
-              }
-              else{
-                p3.clearTint();
-              }
-              //console.log(p3);
-              //p3.setTint(0x00ff00);
-              //console.log(p3.tintTopLeft);
             }
             else if(typeof p4 !== 'undefined' && p4['x'] == si6){
               p4.setTint(0x00ff00);
@@ -1005,7 +1585,7 @@ var P1 = new Phaser.Class({
               p16.setTint(0x00ff00);
             }
           });
-        }
+        }*/
       }
       var red = "no";
       var reds = "";
@@ -1265,10 +1845,8 @@ var P1 = new Phaser.Class({
             }
           });
         }
-        else{
-          console.log('player 2');
+        /*else{
           th.socket.on('sel', function (si5) {
-            console.log(si5);
             if(reds == si5){
               c.clearTint();
               reds = "";
@@ -1395,10 +1973,10 @@ var P1 = new Phaser.Class({
                 else{
                   c.setTint(0xff0000);
                 }
-              }*/
+              }
             }
           });
-        }
+        }*/
       }
       function start(th, cards, p){
         c5 = th.add.image(250, 400, cards[5]).setInteractive({ useHandCursor: true  } );
@@ -1441,7 +2019,7 @@ var P1 = new Phaser.Class({
         /*cg = th.add.image(625, 250, "Guns").setInteractive({ useHandCursor: true  } );
         hove(cg, th, 'Guns' + 'big');
         select(cg, th, 'Guns');*/
-        p0 = th.add.image(250, 550, p[0]).setInteractive({ useHandCursor: true  } );
+        /*p0 = th.add.image(250, 550, p[0]).setInteractive({ useHandCursor: true  } );
         hove(p0, th, p[0] + 'big');
         bselect(p0, th, p[0]);
         p1 = th.add.image(375, 550, p[1]).setInteractive({ useHandCursor: true  } );
@@ -1452,8 +2030,177 @@ var P1 = new Phaser.Class({
         bselect(p2, th, p[2]);
         p3 = th.add.image(625, 550, p[3]).setInteractive({ useHandCursor: true  } );
         hove(p3, th, p[3] + 'big');
-        bselect(p3, th, p[3]);
-        console.log(p3["texture"]["key"]);
+        bselect(p3, th, p[3]);*/
+        hand = 4;
+        var z = hand - 1;
+        /*if (typeof p[z] == 'undefined') {
+          shuffle(pdis);
+          p = p.concat(pdis);
+          pdis = [];
+        }*/
+        function draw(start, num){
+          var y = 0;
+          for (var i = start; i < num; i++) {
+            /*if(typeof p[i] == "undefined"){
+              shuffle(pdis);
+              p = p.concat(pdis);
+              pdis = [];
+            }*/
+            if(p[i] == "Browser" || p[i] == "Driver" || p[i] == "CloudStorage" || p[i] == "IMDS" || p[i] == "User" || p[i] == "FakeInstaller" || p[i] == "OfficeMacro" || p[i] == "Sysmon" || p[i] == "DPAT" || p[i] == "Endpoint" || p[i] == "Sinkhole" || p[i] == "IAM" || p[i] == "MFAB"){
+              hand += 1;
+              y += 1;
+            }
+          }
+          if(y > 0){
+            draw(num, hand);
+          }
+        }
+        draw(0,4);
+        z = hand - 1;
+        if (typeof p[z] == 'undefined') {
+          shuffle(pdis);
+          p = p.concat(pdis);
+          pdis = [];
+        }
+        if (typeof p0 !== 'undefined') {
+          p0.destroy();
+        }
+        if (typeof p1 !== 'undefined') {
+          p1.destroy();
+        }
+        if (typeof p2 !== 'undefined') {
+          p2.destroy();
+        }
+        if (typeof p3 !== 'undefined') {
+          p3.destroy();
+        }
+        if (typeof p4 !== 'undefined') {
+          p4.destroy();
+        }
+        if (typeof p5 !== 'undefined') {
+          p5.destroy();
+        }
+        if (typeof p6 !== 'undefined') {
+          p6.destroy();
+        }
+        if (typeof p7 !== 'undefined') {
+          p7.destroy();
+        }
+        if (typeof p7 !== 'undefined') {
+          p7.destroy();
+        }
+        if (typeof p8 !== 'undefined') {
+          p8.destroy();
+        }
+        if (typeof p9 !== 'undefined') {
+          p9.destroy();
+        }
+        if (typeof p10 !== 'undefined') {
+          p10.destroy();
+        }
+        if (typeof p11 !== 'undefined') {
+          p11.destroy();
+        }
+        if (typeof p12 !== 'undefined') {
+          p12.destroy();
+        }
+        if (typeof p13 !== 'undefined') {
+          p13.destroy();
+        }
+        if (typeof p14 !== 'undefined') {
+          p14.destroy();
+        }
+        if (typeof p15 !== 'undefined') {
+          p15.destroy();
+        }
+        if (typeof p16 !== 'undefined') {
+          p16.destroy();
+        }
+        if(hand > 15 && typeof p[15] != 'undefined'){
+          p15 = th.add.image(63, 550, p[15]).setInteractive({ useHandCursor: true  } );
+          hove(p15, th, p[15] + 'big');
+          bselect(p15, th, p[15]);
+        }
+        if(hand > 7 && typeof p[7] != 'undefined'){
+          p7 = th.add.image(125, 550, p[7]).setInteractive({ useHandCursor: true  } );
+          hove(p7, th, p[7] + 'big');
+          bselect(p7, th, p[7]);
+        }
+        if(hand > 8 && typeof p[8] != 'undefined'){
+          p8 = th.add.image(187, 550, p[8]).setInteractive({ useHandCursor: true  } );
+          hove(p8, th, p[8] + 'big');
+          bselect(p8, th, p[8]);
+        }
+        if(hand > 0 && typeof p[0] != 'undefined'){
+          p0 = th.add.image(250, 550, p[0]).setInteractive({ useHandCursor: true  } );
+          hove(p0, th, p[0] + 'big');
+          bselect(p0, th, p[0]);
+        }
+        if(hand > 9 && typeof p[9] != 'undefined'){
+          p9 = th.add.image(312, 550, p[9]).setInteractive({ useHandCursor: true  } );
+          hove(p9, th, p[9] + 'big');
+          bselect(p9, th, p[9]);
+        }
+        if(hand > 1 && typeof p[1] != 'undefined'){
+          p1 = th.add.image(375, 550, p[1]).setInteractive({ useHandCursor: true  } );
+          hove(p1, th, p[1] + 'big');
+          bselect(p1, th, p[1]);
+        }
+        if(hand > 10 && typeof p[10] != 'undefined'){
+          p10 = th.add.image(437, 550, p[10]).setInteractive({ useHandCursor: true  } );
+          hove(p10, th, p[10] + 'big');
+          bselect(p10, th, p[10]);
+        }
+        if(hand > 2 && typeof p[2] != 'undefined'){
+          p2 = th.add.image(500, 550, p[2]).setInteractive({ useHandCursor: true  } );
+          hove(p2, th, p[2] + 'big');
+          bselect(p2, th, p[2]);
+        }
+        if(hand > 11 && typeof p[11] != 'undefined'){
+          p11 = th.add.image(562, 550, p[11]).setInteractive({ useHandCursor: true  } );
+          hove(p11, th, p[11] + 'big');
+          bselect(p11, th, p[11]);
+        }
+        if(hand > 3 && typeof p[3] != 'undefined'){
+          p3 = th.add.image(625, 550, p[3]).setInteractive({ useHandCursor: true  } );
+          hove(p3, th, p[3] + 'big');
+          bselect(p3, th, p[3]);
+        }
+        if(hand > 12 && typeof p[12] != 'undefined'){
+          p12 = th.add.image(687, 550, p[12]).setInteractive({ useHandCursor: true  } );
+          hove(p12, th, p[12] + 'big');
+          bselect(p12, th, p[12]);
+        }
+        if(hand > 4 && typeof p[4] != 'undefined'){
+          p4 = th.add.image(750, 550, p[4]).setInteractive({ useHandCursor: true  } );
+          hove(p4, th, p[4] + 'big');
+          bselect(p4, th, p[4]);
+        }
+        if(hand > 13 && typeof p[13] != 'undefined'){
+          p13 = th.add.image(812, 550, p[13]).setInteractive({ useHandCursor: true  } );
+          hove(p13, th, p[13] + 'big');
+          bselect(p13, th, p[13]);
+        }
+        if(hand > 16 && typeof p[16] != 'undefined'){
+          p16 = th.add.image(850, 550, p[16]).setInteractive({ useHandCursor: true  } );
+          hove(p16, th, p[16] + 'big');
+          bselect(p16, th, p[16]);
+        }
+        if(hand > 5 && typeof p[5] != 'undefined'){
+          p5 = th.add.image(875, 550, p[5]).setInteractive({ useHandCursor: true  } );
+          hove(p5, th, p[5] + 'big');
+          bselect(p5, th, p[5]);
+        }
+        if(hand > 14 && typeof p[14] != 'undefined'){
+          p14 = th.add.image(937, 550, p[14]).setInteractive({ useHandCursor: true  } );
+          hove(p14, th, p[14] + 'big');
+          bselect(p14, th, p[14]);
+        }
+        if(hand > 6 && typeof p[6] != 'undefined'){
+          p6 = th.add.image(1000, 550, p[6]).setInteractive({ useHandCursor: true  } );
+          hove(p6, th, p[6] + 'big');
+          bselect(p6, th, p[6]);
+        }
       }
       // functions //
       function shuffle(array) {
@@ -1605,11 +2352,408 @@ var P1 = new Phaser.Class({
           checkScore = "yes";
         }
       });*/
+
+      // tend
+      tend.on('pointerdown', () => {
+        if(pl == player){
+        this.sound.add('mend').play();
+        var zz = c0["texture"]["key"];
+        setTimeout(() => {
+            this.sound.add(zz).play();
+        }, 2000);
+        pdis = pdis.filter(function( element ) {
+           return element !== undefined;
+        });
+        for (i = 1; i < 18; i++) {
+          if(hand == i){
+            for (x = 0; x < i; x++) {
+              pdis.push(p[0]);
+              p.shift();
+              p.filter(val => val);
+            }
+          }
+        }
+        skill = 0;
+        coin = 0;
+        total = 0;
+        card = 0;
+        scard = 0;
+        ccard = 0;
+        cost = 0;
+        type = 0;
+        temp = [];
+        temp2 = "";
+        hand = 4;
+        red = "No";
+        aq = 0;
+        if (typeof p0 !== 'undefined') {
+          p0.destroy();
+        }
+        if (typeof p1 !== 'undefined') {
+          p1.destroy();
+        }
+        if (typeof p2 !== 'undefined') {
+          p2.destroy();
+        }
+        if (typeof p3 !== 'undefined') {
+          p3.destroy();
+        }
+        if (typeof p4 !== 'undefined') {
+          p4.destroy();
+        }
+        if (typeof p5 !== 'undefined') {
+          p5.destroy();
+        }
+        if (typeof p6 !== 'undefined') {
+          p6.destroy();
+        }
+        if (typeof p7 !== 'undefined') {
+          p7.destroy();
+        }
+        if (typeof p8 !== 'undefined') {
+          p8.destroy();
+        }
+        if (typeof p9 !== 'undefined') {
+          p9.destroy();
+        }
+        if (typeof p10 !== 'undefined') {
+          p10.destroy();
+        }
+        if (typeof p11 !== 'undefined') {
+          p11.destroy();
+        }
+        if (typeof p12 !== 'undefined') {
+          p12.destroy();
+        }
+        if (typeof p13 !== 'undefined') {
+          p13.destroy();
+        }
+        if (typeof p14 !== 'undefined') {
+          p14.destroy();
+        }
+        if (typeof p15 !== 'undefined') {
+          p15.destroy();
+        }
+        if (typeof p16 !== 'undefined') {
+          p16.destroy();
+        }
+        if (typeof p17 !== 'undefined') {
+          p17.destroy();
+        }
+        skillText.setText('Skill: ' + skill);
+        coinText.setText('Coins: ' + coin);
+        totalText.setText('Total: ' + total);
+        cardText.setText('Cards: ' + card);
+        if(c0["texture"]["key"] == "Browser"){
+          health -= 5;
+        }
+        else if (c0["texture"]["key"] == "Malware") {
+          health -= 2;
+        }
+        else if (c0["texture"]["key"] == "PrivilegeEsc") {
+          health -= 2;
+        }
+        else if (c0["texture"]["key"] == "Driver") {
+          health -= 3;
+        }
+        else if (c0["texture"]["key"] == "Service") {
+          health -= 4;
+        }
+        else if (c0["texture"]["key"] == "CloudStorage") {
+          health -= 4;
+        }
+        else if (c0["texture"]["key"] == "IMDS") {
+          health -= 1;
+        }
+        else if (c0["texture"]["key"] == "MFA") {
+          health -= 2;
+        }
+        else if (c0["texture"]["key"] == "User") {
+          health -= 4;
+        }
+        else if (c0["texture"]["key"] == "CloudAccount") {
+          health -= 2;
+        }
+        else if (c0["texture"]["key"] == "CredStuffing") {
+          health -= 4;
+        }
+        else if (c0["texture"]["key"] == "Kubelet") {
+          health -= 5;
+        }
+        else if (c0["texture"]["key"] == "WateringHole") {
+          health -= 3;
+        }
+        else if (c0["texture"]["key"] == "WebShell") {
+          health -= 5;
+        }
+        else if (c0["texture"]["key"] == "FakeInstaller") {
+          health -= 4;
+        }
+        else if (c0["texture"]["key"] == "OfficeMacro") {
+          health -= 6;
+        }
+        else if (c0["texture"]["key"] == "ShadowCopy") {
+          health -= 3;
+        }
+        else if (c0["texture"]["key"] == "Sysmon") {
+          health -= 3;
+        }
+        else if (c0["texture"]["key"] == "Behavior") {
+          health -= 3;
+        }
+        else if (c0["texture"]["key"] == "DPAT") {
+          health -= 3;
+        }
+        else if (c0["texture"]["key"] == "Endpoint") {
+          health -= 4;
+        }
+        else if (c0["texture"]["key"] == "SIEM") {
+          health -= 5;
+        }
+        else if (c0["texture"]["key"] == "Sinkhole") {
+          health -= 5;
+        }
+        else if (c0["texture"]["key"] == "ZeroTrust") {
+          health -= 2;
+        }
+        else if (c0["texture"]["key"] == "EMP") {
+          health -= 10;
+        }
+        else if (c0["texture"]["key"] == "IAM") {
+          health -= 3;
+        }
+        else if (c0["texture"]["key"] == "SRUM") {
+          health -= 5;
+        }
+        else if (c0["texture"]["key"] == "MFAB") {
+          health -= 1;
+        }
+        if(health < 1){
+          localStorage.setItem(localStoragePlayer, player);
+            this.sound.add('mlose').play();
+            this.game.sound.stopAll();
+            window.location.href = "lose.html";
+        }
+        /*cc.visible = false;
+        ce.visible = false;
+        cp.visible = false;*/
+        if(player == 1){
+          player1 = p;
+          p = player2;
+          pdis1 = pdis;
+          pdis = pdis2;
+          health1 = health;
+          health = health2
+          game1 = game;
+          game = game2;
+          player = 2;
+          playerText.setText('Player: 2');
+          if(mis2[0] == "yes"){
+            cc.visible = true;
+          }
+          else{
+            cc.visible = false;
+          }
+          if(mis2[1] == "yes"){
+            ce.visible = true;
+          }
+          else{
+            ce.visible = false;
+          }
+          if(mis2[2] == "yes"){
+            cp.visible = true;
+          }
+          else{
+            cp.visible = false;
+          }
+        }
+        else {
+          player2 = p;
+          p = player1;
+          pdis2 = pdis;
+          pdis = pdis1;
+          health2 = health;
+          health = health1
+          game2 = game;
+          game = game1;
+          player = 1;
+          playerText.setText('Player: 1');
+          if(mis1[0] == "yes"){
+            cc.visible = true;
+          }
+          else{
+            cc.visible = false;
+          }
+          if(mis1[1] == "yes"){
+            ce.visible = true;
+          }
+          else{
+            ce.visible = false;
+          }
+          if(mis1[2] == "yes"){
+            cp.visible = true;
+          }
+          else{
+            cp.visible = false;
+          }
+        }
+        healthText.setText('Health:' + health);
+        var t = cards.indexOf(c0["texture"]["key"]);
+        cards.splice(t, 1);
+        cards.filter(val => val);
+        dis.push(c0["texture"]["key"]);
+        if (typeof cards[5] !== 'undefined') {
+          c5 = this.add.image(250, 400, cards[5]).setInteractive({ useHandCursor: true  } );
+          hove(c5, this, cards[5] + 'big');
+          select(c5, this, cards[5]);
+        }
+        else {
+          shuffle(dis);
+          cards = cards.concat(dis);
+          dis = [];
+          c5 = this.add.image(250, 400, cards[5]).setInteractive({ useHandCursor: true  } );
+          hove(c5, this, cards[5] + 'big');
+          select(c5, this, cards[5]);
+        }
+        c4 = this.add.image(375, 400, cards[4]).setInteractive({ useHandCursor: true  } );
+        hove(c4, this, cards[4] + 'big');
+        select(c4, this, cards[4]);
+        c3 = this.add.image(500, 400, cards[3]).setInteractive({ useHandCursor: true  } );
+        hove(c3, this, cards[3] + 'big');
+        select(c3, this, cards[3]);
+        c2 = this.add.image(625, 400, cards[2]).setInteractive({ useHandCursor: true  } );
+        hove(c2, this, cards[2] + 'big');
+        select(c2, this, cards[2]);
+        c1 = this.add.image(750, 400, cards[1]).setInteractive({ useHandCursor: true  } );
+        hove(c1, this, cards[1] + 'big');
+        select(c1, this, cards[1]);
+        c0 = this.add.image(875, 400, cards[0]).setInteractive({ useHandCursor: true  } );
+        hove(c0, this, cards[0] + 'big');
+        select(c0, this, cards[0]);
+        var z = hand - 1;
+        if (typeof p[z] == 'undefined') {
+          shuffle(pdis);
+          p = p.concat(pdis);
+          pdis = [];
+        }
+        function draw(start, num){
+          var y = 0;
+          for (var i = start; i < num; i++) {
+            if(typeof p[i] == "undefined"){
+              shuffle(pdis);
+              p = p.concat(pdis);
+              pdis = [];
+            }
+            if(p[i] == "Browser" || p[i] == "Driver" || p[i] == "CloudStorage" || p[i] == "IMDS" || p[i] == "User" || p[i] == "FakeInstaller" || p[i] == "OfficeMacro" || p[i] == "Sysmon" || p[i] == "DPAT" || p[i] == "Endpoint" || p[i] == "Sinkhole" || p[i] == "IAM" || p[i] == "MFAB"){
+              hand += 1;
+              y += 1;
+            }
+          }
+          if(y > 0){
+            draw(num, hand);
+          }
+        }
+        draw(0,4);
+        z = hand - 1;
+        if (typeof p[z] == 'undefined') {
+          shuffle(pdis);
+          p = p.concat(pdis);
+          pdis = [];
+        }
+        if(hand > 15 && typeof p[15] != 'undefined'){
+          p15 = this.add.image(63, 550, p[15]).setInteractive({ useHandCursor: true  } );
+          hove(p15, this, p[15] + 'big');
+          bselect(p15, this, p[15]);
+        }
+        if(hand > 7 && typeof p[7] != 'undefined'){
+          p7 = this.add.image(125, 550, p[7]).setInteractive({ useHandCursor: true  } );
+          hove(p7, this, p[7] + 'big');
+          bselect(p7, this, p[7]);
+        }
+        if(hand > 8 && typeof p[8] != 'undefined'){
+          p8 = this.add.image(187, 550, p[8]).setInteractive({ useHandCursor: true  } );
+          hove(p8, this, p[8] + 'big');
+          bselect(p8, this, p[8]);
+        }
+        if(hand > 0 && typeof p[0] != 'undefined'){
+          p0 = this.add.image(250, 550, p[0]).setInteractive({ useHandCursor: true  } );
+          hove(p0, this, p[0] + 'big');
+          bselect(p0, this, p[0]);
+        }
+        if(hand > 9 && typeof p[9] != 'undefined'){
+          p9 = this.add.image(312, 550, p[9]).setInteractive({ useHandCursor: true  } );
+          hove(p9, this, p[9] + 'big');
+          bselect(p9, this, p[9]);
+        }
+        if(hand > 1 && typeof p[1] != 'undefined'){
+          p1 = this.add.image(375, 550, p[1]).setInteractive({ useHandCursor: true  } );
+          hove(p1, this, p[1] + 'big');
+          bselect(p1, this, p[1]);
+        }
+        if(hand > 10 && typeof p[10] != 'undefined'){
+          p10 = this.add.image(437, 550, p[10]).setInteractive({ useHandCursor: true  } );
+          hove(p10, this, p[10] + 'big');
+          bselect(p10, this, p[10]);
+        }
+        if(hand > 2 && typeof p[2] != 'undefined'){
+          p2 = this.add.image(500, 550, p[2]).setInteractive({ useHandCursor: true  } );
+          hove(p2, this, p[2] + 'big');
+          bselect(p2, this, p[2]);
+        }
+        if(hand > 11 && typeof p[11] != 'undefined'){
+          p11 = this.add.image(562, 550, p[11]).setInteractive({ useHandCursor: true  } );
+          hove(p11, this, p[11] + 'big');
+          bselect(p11, this, p[11]);
+        }
+        if(hand > 3 && typeof p[3] != 'undefined'){
+          p3 = this.add.image(625, 550, p[3]).setInteractive({ useHandCursor: true  } );
+          hove(p3, this, p[3] + 'big');
+          bselect(p3, this, p[3]);
+        }
+        if(hand > 12 && typeof p[12] != 'undefined'){
+          p12 = this.add.image(687, 550, p[12]).setInteractive({ useHandCursor: true  } );
+          hove(p12, this, p[12] + 'big');
+          bselect(p12, this, p[12]);
+        }
+        if(hand > 4 && typeof p[4] != 'undefined'){
+          p4 = this.add.image(750, 550, p[4]).setInteractive({ useHandCursor: true  } );
+          hove(p4, this, p[4] + 'big');
+          bselect(p4, this, p[4]);
+        }
+        if(hand > 13 && typeof p[13] != 'undefined'){
+          p13 = this.add.image(812, 550, p[13]).setInteractive({ useHandCursor: true  } );
+          hove(p13, this, p[13] + 'big');
+          bselect(p13, this, p[13]);
+        }
+        if(hand > 16 && typeof p[16] != 'undefined'){
+          p16 = this.add.image(850, 550, p[16]).setInteractive({ useHandCursor: true  } );
+          hove(p16, this, p[16] + 'big');
+          bselect(p16, this, p[16]);
+        }
+        if(hand > 5 && typeof p[5] != 'undefined'){
+          p5 = this.add.image(875, 550, p[5]).setInteractive({ useHandCursor: true  } );
+          hove(p5, this, p[5] + 'big');
+          bselect(p5, this, p[5]);
+        }
+        if(hand > 14 && typeof p[14] != 'undefined'){
+          p14 = this.add.image(937, 550, p[14]).setInteractive({ useHandCursor: true  } );
+          hove(p14, this, p[14] + 'big');
+          bselect(p14, this, p[14]);
+        }
+        if(hand > 6 && typeof p[6] != 'undefined'){
+          p6 = this.add.image(1000, 550, p[6]).setInteractive({ useHandCursor: true  } );
+          hove(p6, this, p[6] + 'big');
+          bselect(p6, this, p[6]);
+        }
+        th.socket.emit('tend', cards, dis);
+      }
+      });
+
   },
   update() {}
 });
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.WEBGL,
     scale: {
       mode: Phaser.Scale.FIT,
       parent: "app",

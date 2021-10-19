@@ -30,8 +30,8 @@ if(holding.length > 1){
 }
 
 
-socket.on('cards', function (cards) {
-  io.to(players[socket.id]).emit('cards', cards);
+socket.on('cards', function (cards, health) {
+  io.to(players[socket.id]).emit('cards', cards, health);
 });
 socket.on('p', function (p) {
   io.to(players[socket.id]).emit('p', p);
@@ -41,10 +41,17 @@ socket.on('sel', function (c) {
   io.to(players[socket.id]).emit('sel', c);
 });
 socket.on('bsel', function (c) {
-  console.log(c);
   io.to(players[socket.id]).emit('bsel', c);
 });
-
+socket.on('aq', function (cards, p, mis, l) {
+  io.to(players[socket.id]).emit('aq', cards, p, mis, l);
+});
+socket.on('tend', function (cards, dis) {
+  io.to(players[socket.id]).emit('tend', cards, dis);
+});
+socket.on('next', function (cards, p, health) {
+  io.to(players[socket.id]).emit('next', cards, p, health);
+});
 // send the players object to the new player
 //socket.emit('currentPlayers', players);
 // update all other players of the new player

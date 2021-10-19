@@ -1351,7 +1351,7 @@ var config = {
         }
     },
     render: {
-      clearBeforeRender: false
+      clearBeforeRender: true
     },
     enableDebug: false,
     backgroundColor: '#000000',
