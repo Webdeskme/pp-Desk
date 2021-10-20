@@ -12,10 +12,8 @@ var players = {};
 var holding = [];
 console.log(__dirname + '/www');
 app.use('/', express.static(__dirname + '/www'))
-
 io.on('connection', function (socket) {
 console.log('a user connected');
-
 players[socket.id] = "no";
 holding.push(socket.id);
 if(holding.length > 1){
@@ -28,8 +26,6 @@ if(holding.length > 1){
   io.to(a).emit("vs", b);
   io.to(b).emit("vs", a);
 }
-
-
 socket.on('cards', function (cards, health) {
   io.to(players[socket.id]).emit('cards', cards, health);
 });
@@ -37,7 +33,6 @@ socket.on('p', function (p) {
   io.to(players[socket.id]).emit('p', p);
 });
 socket.on('sel', function (c) {
-  //console.log(c);
   io.to(players[socket.id]).emit('sel', c);
 });
 socket.on('bsel', function (c) {
@@ -52,16 +47,14 @@ socket.on('tend', function (cards, dis) {
 socket.on('next', function (cards, p, health) {
   io.to(players[socket.id]).emit('next', cards, p, health);
 });
-// send the players object to the new player
-//socket.emit('currentPlayers', players);
-// update all other players of the new player
-//socket.broadcast.emit('newPlayer', players);
+socket.on('end', function (type) {
+  io.to(players[socket.id]).emit('end', type);
+});
 socket.on('disconnect', function () {
   console.log('user disconnected');
   io.to(players[socket.id]).emit("dis", "yes");
   delete players[socket.id];
   console.log(players);
-  //socket.broadcast.emit('goodbye', players);
 });
 });
 

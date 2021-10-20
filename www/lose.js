@@ -259,7 +259,7 @@ var Lose = new Phaser.Class({
           //endm.stop();
           this.game.sound.stopAll();
           //this.scene.start('p1');
-          window.location.href = "game.html";
+          window.location.href = "../game.html";
         });
         var localStorageName = "piratesPort";
         var localStorageTemp = "piratesPort_temp";
