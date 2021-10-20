@@ -417,23 +417,14 @@ var P1 = new Phaser.Class({
             big.destroy();
             big = null;
           }
-          if(mis[0] == "yes"){
-            cc.visible = true;
+          if(mis[0] != "yes"){
+            cc.destroy();
           }
-          else{
-            cc.visible = false;
+          if(mis[1] != "yes"){
+            ce.destroy();
           }
-          if(mis[1] == "yes"){
-            ce.visible = true;
-          }
-          else{
-            ce.visible = false;
-          }
-          if(mis[2] == "yes"){
-            cp.visible = true;
-          }
-          else{
-            cp.visible = false;
+          if(mis[2] != "yes"){
+            cp.destroy();
           }
           c5 = th.add.image(250, 400, cards[5]).setInteractive({ useHandCursor: true  } );
           hove(c5, th, cards[5] + 'big');
@@ -1367,7 +1358,8 @@ var P1 = new Phaser.Class({
                   }
                   if(temp2 == "COM"){
                     th.sound.add('comp').play();
-                    cc.visible = false;
+                    //cc.visible = false;
+                    cc.destroy();
                     if(player == 1){
                       mis1[0] = "NO";
                     }
@@ -1377,7 +1369,8 @@ var P1 = new Phaser.Class({
                   }
                   else if (temp2 == "ENGINES") {
                     th.sound.add('comp').play();
-                    ce.visible = false;
+                    //ce.visible = false;
+                    ce.destroy();
                     if(player == 1){
                       mis1[1] = "NO";
                     }
@@ -1387,7 +1380,8 @@ var P1 = new Phaser.Class({
                   }
                   else if (temp2 == "PORT") {
                     th.sound.add('comp').play();
-                    cp.visible = false;
+                    //cp.visible = false;
+                    cp.destroy();
                     if(player == 1){
                       mis1[2] = "NO";
                     }
